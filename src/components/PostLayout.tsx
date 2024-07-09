@@ -9,9 +9,9 @@ export function PostLayout({ post }: { post: Post }) {
             style={{
                 color: theme.screenText,
             }}
-            className="h-max w-full space-y-2 mx-4 mt-4 [&_h1]:text-5xl [&_h1]:font-bold [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:text-xl [&_h3]:font-semibold [&_a]:text-blue-600 [&_ul]:normal-nums"
+            className="h-max space-y-2 mx-4 mt-4 [&_h1]:text-5xl [&_h1]:font-bold [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:text-xl [&_h3]:font-semibold [&_a]:text-blue-600 [&_ul]:normal-nums"
         >
-            <div className="h-full flex flex-col pb-4 justify-between">
+            <div className="h-full w-full flex flex-col pb-4 justify-between">
                 <div className="">
                     <h1
                         style={{
@@ -23,7 +23,7 @@ export function PostLayout({ post }: { post: Post }) {
                     <p>{post.description}</p>
                 </div>
                 <img
-                    className="mt-2 aspect-video w-[750px]"
+                    className="mt-2 aspect-video h-auto w-[750px]"
                     src={post.image}
                     alt={post.title}
                 />

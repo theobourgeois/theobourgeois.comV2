@@ -51,7 +51,7 @@ function App() {
                 <div
                     className="w-full h-full absolute z-30"
                     style={{
-                        background: `linear-gradient(100deg, transparent 0%, transparent 70%, #FFFFFF30 71.2%, #FFFFFF30 79%, transparent 81%, transparent 100%)`,
+                        background: `linear-gradient(100deg, transparent 0%, transparent 65%, #FFFFFF30 71.2%, #FFFFFF30 79%, transparent 83%, transparent 100%)`,
                         mixBlendMode: "overlay",
                         pointerEvents: "none",
                     }}
@@ -77,7 +77,7 @@ function App() {
                     }}
                 ></div>
                 <div
-                    className="h-[75%] relative flex flex-col-reverse sm:flex-row items-start"
+                    className="h-[75%] justify-center sm:justify-start relative flex flex-col-reverse sm:flex-row items-start"
                     style={{
                         background: `linear-gradient(180deg, ${theme.primaryDark} 0%, ${theme.primaryLight} 50%, ${theme.primaryDark} 100%)`,
                         backgroundSize: "cover",
@@ -91,7 +91,7 @@ function App() {
                             background: `linear-gradient(180deg, ${theme.screenLight} 0%, ${theme.screen} 100%)`,
                         }}
                         ref={containerRef}
-                        className="relative z-20 flex-1 sm:h-[95%] m-4 flex overflow-auto"
+                        className="relative z-20 w-[90%] xs:w-full sm:w-full sm:h-[95%] mx-auto my-4 sm:mx-4 flex overflow-auto"
                     >
                         <PostLayout post={selectedPost} />
                     </div>
@@ -120,27 +120,31 @@ function App() {
                                     My Posts
                                 </p>
                             </div>
-                            {(Object.keys(posts) as PostSlug[]).map(
-                                (postSlug) => (
-                                    <div
-                                        key={postSlug}
-                                        style={{
-                                            background:
-                                                postSlug === selectedPostSlug
-                                                    ? `linear-gradient(180deg, ${theme.accentLight} 0%, ${theme.accentDark} 100%)`
-                                                    : "none",
-                                            color:
-                                                postSlug === selectedPostSlug
-                                                    ? theme.screenTextAlt
-                                                    : theme.screenText,
-                                        }}
-                                        className="py-1 text-lg hover:underline cursor-pointer font-medium px-2"
-                                        onClick={handleChangePost(postSlug)}
-                                    >
-                                        {posts[postSlug].title}
-                                    </div>
-                                )
-                            )}
+                            <div className="overflow-auto h-[220px] sm:h-auto">
+                                {(Object.keys(posts) as PostSlug[]).map(
+                                    (postSlug) => (
+                                        <div
+                                            key={postSlug}
+                                            style={{
+                                                background:
+                                                    postSlug ===
+                                                    selectedPostSlug
+                                                        ? `linear-gradient(180deg, ${theme.accentLight} 0%, ${theme.accentDark} 100%)`
+                                                        : "none",
+                                                color:
+                                                    postSlug ===
+                                                    selectedPostSlug
+                                                        ? theme.screenTextAlt
+                                                        : theme.screenText,
+                                            }}
+                                            className="py-1 text-lg hover:underline cursor-pointer font-medium px-2"
+                                            onClick={handleChangePost(postSlug)}
+                                        >
+                                            {posts[postSlug].title}
+                                        </div>
+                                    )
+                                )}
+                            </div>
                         </div>
                         <Dial />
                     </div>
@@ -160,7 +164,7 @@ function App() {
                 >
                     <div className="w-full h-full flex justify-center items-center">
                         <p
-                            className="text-3xl select-none"
+                            className="text-xl xs:text-2xl sm:text-3xl select-none"
                             style={{
                                 color: theme.text,
                                 fontFamily: "Lexend Zetta",
