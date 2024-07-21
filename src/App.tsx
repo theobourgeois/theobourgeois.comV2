@@ -3,12 +3,13 @@ import { Dial } from "./components/Dial";
 import { PostLayout } from "./components/PostLayout";
 import { usePost } from "./utils/posts";
 import { useTheme } from "./utils/themes";
-import { useIsMobileView } from "./utils/hook";
 import { PostSelector } from "./components/PostSelector";
+import { FaLinkedin } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
 
 function App() {
     const theme = useTheme();
-    const isMobileView = useIsMobileView();
     const selectedPost = usePost();
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -122,9 +123,9 @@ function App() {
                         boxShadow: `inset -2px 0px 2px 2px ${theme.primaryDark},inset 2px -2px 2px 2px ${theme.primaryLight}`,
                     }}
                 >
-                    <div className="w-full h-full flex justify-center items-center">
+                    <div className="w-full h-full relative">
                         <p
-                            className="text-xl xs:text-2xl sm:text-3xl select-none"
+                            className="text-xl xs:text-2xl sm:text-3xl select-none absolute left-1/2 -translate-x-1/2 bottom-1/2 translate-y-1/2 transform"
                             style={{
                                 color: theme.text,
                                 fontFamily: "Lexend Zetta",
@@ -132,6 +133,32 @@ function App() {
                         >
                             théobourgeois
                         </p>
+                        <div className="flex gap-2 px-4 absolute right-0 top-1/2 -translate-y-1/2 transform">
+                            <a href="https://www.github.com/theobourgeois">
+                                <FaGithub
+                                    size={35}
+                                    style={{
+                                        color: theme.text,
+                                    }}
+                                />
+                            </a>
+                            <a href="https://www.linkedin.com/in/theobourgeois/">
+                                <FaLinkedin
+                                    size={35}
+                                    style={{
+                                        color: theme.text,
+                                    }}
+                                />
+                            </a>
+                            <a href="hhttps://x.com/_theobourgeois">
+                                <FaTwitter
+                                    size={35}
+                                    style={{
+                                        color: theme.text,
+                                    }}
+                                />
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div
