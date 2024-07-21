@@ -38,7 +38,7 @@ export default function TrackRack() {
                 improve it.
             </p>
 
-            <img src="/trackrack-2.png" />
+            <img src="/trackrack-2.png" className="w-full h-auto" />
             <p className="italic">
                 The 'Track' page. Notice how files are separated by type
             </p>
