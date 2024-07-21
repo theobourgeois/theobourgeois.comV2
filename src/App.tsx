@@ -150,7 +150,7 @@ function App() {
                                     }}
                                 />
                             </a>
-                            <a href="hhttps://x.com/_theobourgeois">
+                            <a href="https://x.com/_theobourgeois">
                                 <FaTwitter
                                     size={35}
                                     style={{
