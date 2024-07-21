@@ -1,32 +1,16 @@
 import { useEffect, useRef } from "react";
 import { Dial } from "./components/Dial";
 import { PostLayout } from "./components/PostLayout";
-import { PostSlug, posts, usePost, usePostStore } from "./utils/posts";
+import { usePost } from "./utils/posts";
 import { useTheme } from "./utils/themes";
-import { useSkipFirstRenderEffect } from "./utils/hook";
+import { useIsMobileView } from "./utils/hook";
+import { PostSelector } from "./components/PostSelector";
 
 function App() {
     const theme = useTheme();
+    const isMobileView = useIsMobileView();
     const selectedPost = usePost();
-    const selectedPostSlug = usePostStore((state) => state.post);
-    const setPost = usePostStore((state) => state.setPost);
     const containerRef = useRef<HTMLDivElement>(null);
-
-    const handleChangePost = (post: PostSlug) => () => {
-        setPost(post);
-    };
-
-    useSkipFirstRenderEffect(() => {
-        window.history.replaceState(null, "", `?post=${selectedPostSlug}`);
-    }, [selectedPostSlug]);
-
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const post = params.get("post") as PostSlug;
-        if (post && Object.keys(posts).includes(post)) {
-            setPost(post);
-        }
-    }, [setPost]);
 
     // scroll to top when navigate to new post because it doesn't do that for some reason
     useEffect(() => {
@@ -120,31 +104,7 @@ function App() {
                                     My Posts
                                 </p>
                             </div>
-                            <div className="overflow-auto h-[220px] sm:h-auto">
-                                {(Object.keys(posts) as PostSlug[]).map(
-                                    (postSlug) => (
-                                        <div
-                                            key={postSlug}
-                                            style={{
-                                                background:
-                                                    postSlug ===
-                                                    selectedPostSlug
-                                                        ? `linear-gradient(180deg, ${theme.accentLight} 0%, ${theme.accentDark} 100%)`
-                                                        : "none",
-                                                color:
-                                                    postSlug ===
-                                                    selectedPostSlug
-                                                        ? theme.screenTextAlt
-                                                        : theme.screenText,
-                                            }}
-                                            className="py-1 text-lg hover:underline cursor-pointer font-medium px-2"
-                                            onClick={handleChangePost(postSlug)}
-                                        >
-                                            {posts[postSlug].title}
-                                        </div>
-                                    )
-                                )}
-                            </div>
+                            <PostSelector />
                         </div>
                         <Dial />
                     </div>

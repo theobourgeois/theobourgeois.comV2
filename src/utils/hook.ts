@@ -1,4 +1,4 @@
-import { DependencyList, EffectCallback, useEffect, useRef } from "react";
+import { DependencyList, EffectCallback, useEffect, useRef, useState } from "react";
 
 export function useSkipFirstRenderEffect(
   effect: EffectCallback,
@@ -14,4 +14,20 @@ export function useSkipFirstRenderEffect(
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
+}
+
+export const useIsMobileView = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return isMobile;
 }

@@ -1,12 +1,6 @@
-import { useEffect } from "react";
-import Prism from "prismjs";
-import "prismjs/themes/prism-okaidia.css";
+import { Code } from "../components/Code";
 
 export default function TrackRack() {
-    useEffect(() => {
-        Prism.highlightAll();
-    }, []);
-
     return (
         <>
             <h2>What is TrackRack?</h2>
@@ -69,8 +63,8 @@ export default function TrackRack() {
                 once. This eliminates the need to hold async values in a state
                 or use libraries like React Query.
             </p>
-            <pre>
-                <code className="language-javascript">{`async function getPosts() {
+            <Code
+                code={`async function getPosts() {
   // Fetch posts
 }
 
@@ -84,8 +78,8 @@ async function ServerRenderedComponent() {
       ))}
     </div>
   );
-}`}</code>
-            </pre>
+}`}
+            />
 
             <p>
                 The downsides to NextJS 14 come when you need your website to
@@ -122,9 +116,8 @@ async function ServerRenderedComponent() {
                 TRPC, which works by creating routes where you can define your
                 backend functions. Here's an example:
             </p>
-
-            <pre>
-                <code className="language-javascript">{`export const projectsRouter = createTRPCRouter({
+            <Code
+                code={`export const projectsRouter = createTRPCRouter({
   get: publicProcedure
     .input(
       z.object({
@@ -152,8 +145,8 @@ async function ServerRenderedComponent() {
         data: { isPrivate: input.isPrivate },
       });
     }),
-});`}</code>
-            </pre>
+});`}
+            />
 
             <p>
                 This example shows the router for the `projects` entity. We
@@ -165,12 +158,11 @@ async function ServerRenderedComponent() {
             </p>
 
             <p>To use a procedure is as simple as:</p>
-
-            <pre>
-                <code className="language-javascript">{`const project = await api.projects.get.query({
+            <Code
+                code={`const project = await api.projects.get.query({
   projectUrl: params.project,
-});`}</code>
-            </pre>
+});`}
+            />
 
             <h2>Moving Forward</h2>
 

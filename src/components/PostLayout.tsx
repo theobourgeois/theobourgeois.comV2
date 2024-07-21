@@ -9,7 +9,7 @@ export function PostLayout({ post }: { post: Post }) {
             style={{
                 color: theme.screenText,
             }}
-            className="h-max space-y-2 mx-4 mt-4 [&_h1]:text-5xl [&_h1]:font-bold [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:text-xl [&_h3]:font-semibold [&_a]:text-blue-600 [&_ul]:normal-nums"
+            className="h-max w-full space-y-2 mx-4 mt-4 [&_h1]:text-5xl [&_h1]:font-bold [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:text-xl [&_h3]:font-semibold [&_a]:text-blue-600 [&_ul]:normal-nums"
         >
             <div className="h-full w-full flex flex-col pb-4 justify-between">
                 <div className="">
