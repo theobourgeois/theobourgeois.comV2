@@ -150,14 +150,14 @@ function App() {
                                     }}
                                 />
                             </a>
-                            <a href="https://x.com/_theobourgeois">
+                            {/* <a href="https://x.com/_theobourgeois">
                                 <FaTwitter
                                     size={35}
                                     style={{
                                         color: theme.text,
                                     }}
                                 />
-                            </a>
+                            </a> */}
                         </div>
                     </div>
                 </div>
