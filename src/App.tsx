@@ -6,7 +6,6 @@ import { useTheme } from "./utils/themes";
 import { PostSelector } from "./components/PostSelector";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
 
 function App() {
     const theme = useTheme();
