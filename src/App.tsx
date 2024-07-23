@@ -88,24 +88,49 @@ function App() {
                                 borderRadius: "2px",
                                 background: `linear-gradient(180deg, ${theme.screenLight} 0%, ${theme.screen} 100%)`,
                             }}
-                            className="flex-1 select-none w-full sm:w-64 m-4 overflow-auto flex flex-col"
+                            className="flex-1 select-none w-full sm:w-64 m-4 overflow-auto flex flex-col justify-between"
                         >
+                            <div>
+                                <div
+                                    style={{
+                                        background: `linear-gradient(180deg, ${theme.screenTopBarDark} 0%, ${theme.screenTopBarLight} 50%, ${theme.screenTopBarDark} 100%)`,
+                                    }}
+                                    className="flex justify-center items-center"
+                                >
+                                    <p
+                                        style={{
+                                            color: theme.screenTopBarText,
+                                        }}
+                                        className="text-sm font-medium"
+                                    >
+                                        My Posts
+                                    </p>
+                                </div>
+                                <PostSelector />
+                            </div>
                             <div
                                 style={{
                                     background: `linear-gradient(180deg, ${theme.screenTopBarDark} 0%, ${theme.screenTopBarLight} 50%, ${theme.screenTopBarDark} 100%)`,
                                 }}
-                                className="flex justify-center items-center"
+                                className="flex gap-2 py-1 px-2"
                             >
-                                <p
-                                    style={{
-                                        color: theme.screenTopBarText,
-                                    }}
-                                    className="text-sm font-medium"
-                                >
-                                    My Posts
-                                </p>
+                                <a href="https://www.github.com/theobourgeois">
+                                    <FaGithub
+                                        className="text-lg sm:text-xl"
+                                        style={{
+                                            color: theme.text,
+                                        }}
+                                    />
+                                </a>
+                                <a href="https://www.linkedin.com/in/theobourgeois/">
+                                    <FaLinkedin
+                                        className="text-lg sm:text-xl"
+                                        style={{
+                                            color: theme.text,
+                                        }}
+                                    />
+                                </a>
                             </div>
-                            <PostSelector />
                         </div>
                         <Dial />
                     </div>
@@ -125,7 +150,7 @@ function App() {
                 >
                     <div className="w-full h-full relative">
                         <p
-                            className="text-xl xs:text-2xl sm:text-3xl select-none absolute left-1/2 -translate-x-1/2 bottom-1/2 translate-y-1/2 transform"
+                            className="flex gap-2 items-center text-xl xs:text-2xl sm:text-3xl select-none absolute left-1/2 -translate-x-1/2 bottom-1/2 translate-y-1/2 transform"
                             style={{
                                 color: theme.text,
                                 fontFamily: "Lexend Zetta",
@@ -133,32 +158,6 @@ function App() {
                         >
                             théobourgeois
                         </p>
-                        <div className="flex gap-2 px-4 absolute right-0 top-1/2 -translate-y-1/2 transform">
-                            <a href="https://www.github.com/theobourgeois">
-                                <FaGithub
-                                    size={35}
-                                    style={{
-                                        color: theme.text,
-                                    }}
-                                />
-                            </a>
-                            <a href="https://www.linkedin.com/in/theobourgeois/">
-                                <FaLinkedin
-                                    size={35}
-                                    style={{
-                                        color: theme.text,
-                                    }}
-                                />
-                            </a>
-                            {/* <a href="https://x.com/_theobourgeois">
-                                <FaTwitter
-                                    size={35}
-                                    style={{
-                                        color: theme.text,
-                                    }}
-                                />
-                            </a> */}
-                        </div>
                     </div>
                 </div>
                 <div
