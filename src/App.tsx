@@ -1,16 +1,19 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Dial } from "./components/Dial";
 import { PostLayout } from "./components/PostLayout";
 import { usePost } from "./utils/posts";
-import { useTheme } from "./utils/themes";
+import { ThemeKey, useTheme, useThemeStore } from "./utils/themes";
 import { PostSelector } from "./components/PostSelector";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import { CgDarkMode } from "react-icons/cg";
 
 function App() {
     const theme = useTheme();
     const selectedPost = usePost();
     const containerRef = useRef<HTMLDivElement>(null);
+    const [isMobile, setIsMobile] = useState(false);
+    const { setTheme, theme: themeKey } = useThemeStore((state) => state);
 
     // scroll to top when navigate to new post because it doesn't do that for some reason
     useEffect(() => {
@@ -18,6 +21,124 @@ function App() {
             top: 0,
         });
     }, [selectedPost]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 640) {
+                setIsMobile(true);
+            } else {
+                setIsMobile(false);
+            }
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    useEffect(() => {
+        const theme = localStorage.getItem("theme") as ThemeKey;
+        if (theme) {
+            setTheme(theme);
+        }
+    }, [setTheme]);
+
+    const handleToggleDarkMode = () => {
+        const theme = themeKey === "default" ? "blue" : "default";
+        setTheme(theme);
+        localStorage.setItem(
+            "theme",
+            themeKey === "default" ? "blue" : "default"
+        );
+    };
+
+    if (isMobile) {
+        return (
+            <div
+                className="p-2 bg-gradient-to-b"
+                style={{
+                    background: `linear-gradient(180deg, ${theme.backgroundLight} 0%, ${theme.backgroundDark} 100%)`,
+                }}
+            >
+                <div
+                    className="mb-2 flex flex-wrap justify-between items-center px-1 rounded-sm"
+                    style={{
+                        background: `linear-gradient(180deg, ${theme.screenTopBarDark} 0%, ${theme.screenTopBarLight} 50%, ${theme.screenTopBarDark} 100%)`,
+                    }}
+                >
+                    <p
+                        className="flex gap-2 text-2xl"
+                        style={{
+                            color: theme.text,
+                            fontFamily: "Lexend Zetta",
+                        }}
+                    >
+                        théobourgeois
+                    </p>
+                    <div className="flex gap-2 py-1 px-2 items-center">
+                        <a href="https://www.github.com/theobourgeois">
+                            <FaGithub
+                                className="text-lg sm:text-xl"
+                                style={{
+                                    color: theme.text,
+                                }}
+                            />
+                        </a>
+                        <a href="https://www.linkedin.com/in/theobourgeois/">
+                            <FaLinkedin
+                                className="text-lg sm:text-xl"
+                                style={{
+                                    color: theme.text,
+                                }}
+                            />
+                        </a>
+                        <div
+                            className="h-4 w-[1px]"
+                            style={{
+                                backgroundColor: theme.text,
+                                opacity: 0.4,
+                            }}
+                        ></div>
+
+                        <CgDarkMode
+                            style={{
+                                color: theme.text,
+                            }}
+                            className="text-lg sm:text-xl cursor-pointer"
+                            onClick={handleToggleDarkMode}
+                        />
+                    </div>
+                </div>
+                <div
+                    className="bg-white"
+                    style={{
+                        border: `5px solid ${theme.screenOutline}`,
+                        borderRadius: "1px",
+                        background: `linear-gradient(180deg, ${theme.screenTopBarDark} 0%, ${theme.screenTopBarLight} 50%, ${theme.screenTopBarDark} 100%)`,
+                    }}
+                >
+                    <p
+                        style={{
+                            background: `linear-gradient(180deg, ${theme.screenTopBarDark} 0%, ${theme.screenTopBarLight} 50%, ${theme.screenTopBarDark} 100%)`,
+                            color: theme.screenTopBarText,
+                        }}
+                        className="text-sm font-medium pl-1 text-center"
+                    >
+                        My Posts
+                    </p>
+                    <PostSelector />
+                </div>
+                <div
+                    className="h-max px-4 py-2 mt-2"
+                    style={{
+                        background: `linear-gradient(180deg, ${theme.screenTopBarDark} 0%, ${theme.screenTopBarLight} 50%, ${theme.screenTopBarDark} 100%)`,
+                    }}
+                >
+                    <PostLayout post={selectedPost} />
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div
@@ -61,7 +182,7 @@ function App() {
                     }}
                 ></div>
                 <div
-                    className="h-[75%] justify-center sm:justify-start relative flex flex-col-reverse sm:flex-row items-start"
+                    className="h-[75%] justify-start relative flex flex-row items-start"
                     style={{
                         background: `linear-gradient(180deg, ${theme.primaryDark} 0%, ${theme.primaryLight} 50%, ${theme.primaryDark} 100%)`,
                         backgroundSize: "cover",
@@ -75,7 +196,7 @@ function App() {
                             background: `linear-gradient(180deg, ${theme.screenLight} 0%, ${theme.screen} 100%)`,
                         }}
                         ref={containerRef}
-                        className="relative z-20 w-[90%] xs:w-full sm:w-full sm:h-[95%] mx-auto my-4 sm:mx-4 flex overflow-auto"
+                        className="relative z-20 w-full h-[95%] mb-8 mx-8 mt-4 p-4 flex overflow-auto"
                     >
                         <PostLayout post={selectedPost} />
                     </div>
@@ -111,7 +232,7 @@ function App() {
                                 style={{
                                     background: `linear-gradient(180deg, ${theme.screenTopBarDark} 0%, ${theme.screenTopBarLight} 50%, ${theme.screenTopBarDark} 100%)`,
                                 }}
-                                className="flex gap-2 py-1 px-2"
+                                className="flex gap-2 py-1 px-2 items-center"
                             >
                                 <a href="https://www.github.com/theobourgeois">
                                     <FaGithub
@@ -129,6 +250,21 @@ function App() {
                                         }}
                                     />
                                 </a>
+                                <div
+                                    className="h-4 w-[1px]"
+                                    style={{
+                                        backgroundColor: theme.text,
+                                        opacity: 0.4,
+                                    }}
+                                ></div>
+
+                                <CgDarkMode
+                                    style={{
+                                        color: theme.text,
+                                    }}
+                                    className="text-lg sm:text-xl cursor-pointer"
+                                    onClick={handleToggleDarkMode}
+                                />
                             </div>
                         </div>
                         <Dial />

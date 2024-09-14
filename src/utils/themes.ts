@@ -9,7 +9,7 @@ type ThemeStore = {
 };
 
 export const useThemeStore = create<ThemeStore>((set) => ({
-  theme: "default",
+  theme: "blue",
   setTheme: (theme) =>
     set(() => {
       return { theme };
